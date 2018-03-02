@@ -2,7 +2,7 @@
 
 
 说明
-========
+------
 
 geniusalt是对saltstack的二次封装，主要用于linux服务器集群环境下，对应用配置的集中管理。在这套apiserver的支持下，可以很方便的实现配置集中管理的web界面化。
 
@@ -20,11 +20,11 @@ geniusalt是对saltstack的二次封装，主要用于linux服务器集群环境
 
 
 安装
-========
+------
 
 geniusalt-apiserver用python3编写，在Django环境下运行。是一个相对独立的Django应用。
 
 
 
 接口说明
-========
+------
