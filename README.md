@@ -63,13 +63,17 @@ geniusalt-apiserver用python3编写，在Django环境下运行，是一个相对
 * 依赖系统环境
     * OS: Linux各发行版本即可，不支持windows
     * python3
-    * saltstack： 需要预先安装salt-master，安装方法请参考salt官网：
+    * saltstack： 需要预先安装salt-master，安装方法请参考salt官网：https://repo.saltstack.com/#rhel
 
 * 依赖python3软件包（pip安装即可）
     * django: 开发、测试都是用django-1.11
     * jsonfield
 
 * 安装geniusalt-apiserver
+    下载源码包，将所有文件放在一个目录下，作为一个django的app放在django的工程目录即可，注意配置settings.py以及导入url，
+    ```
+    url路径：在./api/urls.py
+    ```
 
 
 接口说明
