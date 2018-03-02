@@ -1,6 +1,3 @@
-# geniusalt-apiserver
-
-
 设计说明
 ------
 
