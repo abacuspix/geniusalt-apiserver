@@ -22,8 +22,18 @@ geniusalt是对saltstack的二次封装，主要用于linux服务器集群环境
 安装
 ------
 
-geniusalt-apiserver用python3编写，在Django环境下运行。是一个相对独立的Django应用。
+geniusalt-apiserver用python3编写，在Django环境下运行，是一个相对独立的Django应用。
 
+* 依赖系统环境
+    * OS: Linux各发行版本即可，不支持windows
+    * python3
+    * saltstack： 需要预先安装salt-master，安装方法请参考salt官网：
+
+* 依赖python3软件包（pip安装即可）
+    * django: 开发、测试都是用django-1.11
+    * jsonfield
+
+* 安装geniusalt-apiserver
 
 
 接口说明
