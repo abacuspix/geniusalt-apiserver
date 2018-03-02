@@ -1,14 +1,20 @@
 # geniusalt-apiserver
 
 
-说明
+设计说明
 ------
 
 geniusalt是对saltstack的二次封装，主要用于linux服务器集群环境下，对应用配置的集中管理。在这套apiserver的支持下，可以很方便的实现配置集中管理的web界面化。
 
 对应的，我也在这套apiserver的基础上，写了一套linux命令行工具--'gnsalt'，用以简化命令行的输入（相比于单纯用curl调用API而言），以及用yaml格式展示数据。参考项目：https://github.com/alan011/geniusalt-cli
 
-在geniusalt中，将Linux服务器集群环境运行的后台服务抽象为一个个“应用实例（Instance）”。每个应用有它自己的中间件环境，比如有依赖tomcat的，有依赖weblogic的，有纯java自启动的服务，有依赖python环境的等等。这些中间件环境，我们将其抽象为一个个“模块(Module)”。而应用服务运行所在的服务器，我们将其抽象为“节点(Node)”。'实例（Instance）','模块（Module）','节点（Node）'是geniusalt中的三个基本数据对象。
+在geniusalt中，有三个基本的数据对象：
+* 实例（instance）
+将Linux服务器集群环境中运行的后台应用服务，抽象为一个个应用实例。
+* 模块（module）
+每个应用有它自己的中间件环境，比如有依赖tomcat的，有依赖weblogic的，有纯java自启动的服务，有依赖python环境的等等。这些中间件环境，我们将其抽象为一个个“模块(Module)”。
+* 节点（node）
+而应用服务运行所在的服务器，我们将其抽象为“节点(Node)”。
 
 针对每个模块，我们需要saltstack的file_root中，建立一个文件夹，文件夹中定义这个模块需要安装哪些软件包，创建哪些目录，启动哪些服务，配置哪些全局的配置文件等，并创建一个子目录'instance'（如果一个模块没有实例，则不用）。在instance目录中，定义每个应用实例（应用程序包）的安装目录，日志路径，配置文件，启动服务等等。最后，还需要为实例创建一个配置文件，'pillar.json'，用以定义这个模块的实例需要传入哪些pillar变量。
 
