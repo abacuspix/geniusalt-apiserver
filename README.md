@@ -70,9 +70,10 @@ geniusalt-apiserver用python3编写，在Django环境下运行，是一个相对
     * jsonfield
 
 * 安装geniusalt-apiserver
+
     下载源码包，将所有文件放在一个目录下，作为一个django的app放在django的工程目录即可，注意配置settings.py以及导入url，
     ```
-    url路径：在./api/urls.py
+    url路径：./api/urls.py
     ```
 
 
