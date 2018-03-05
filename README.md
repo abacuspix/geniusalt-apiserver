@@ -74,6 +74,6 @@ geniusalt-apiserver用python3编写，在Django环境下运行，是一个相对
     ```
 
 
-接口说明
+功能与接口说明
 ------
 <稍后补充>
