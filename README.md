@@ -111,7 +111,7 @@ token的管理，请参考后文的token_manager使用方法。
 'push'      # 表示一个push操作，即将配置对象应用到实际的服务器。
 ```
 
-'action'支持以下value：
+'action'表示要执行的具体操作，支持以下value：
 ```
 'scan'            # 自动添加node或module, 对于module还可以自动更新pillar参数列表。
                   # 支持操作对象：module, node
