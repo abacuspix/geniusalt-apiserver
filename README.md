@@ -73,7 +73,91 @@ geniusalt-apiserver用python3编写，在Django环境下运行，是一个相对
     url路径：./api/urls.py
     ```
 
+* 启动服务
+进入django的工程目录，执行以下命令
+
+```
+~$ cd /path/to/your/django_project/
+~$ nohup python3 ./manage.py runserver 0.0.0.0:10080 &
+```
 
 功能与接口说明
 ------
-<稍后补充>
+
+* 接口URL（此处以本地调用为例）：
+
+```
+http://localhost:10080/geniusalt/api/v1/ingress
+```
+
+* 调用方式：只能用POST方法
+
+* POST data参数说明
+    * data段， 应该传一个json格式的字典。
+    * 三个必填参数: 'auth_token', 'action', 'object'
+
+'auto_token'用于接口调用的认证。目前版本，还没有做详细的权限划分，只要token认证通过，就能调用apiserver进行所有操作。
+token的管理，请参考后文的token_manager使用方法。
+```
+'auth_token':'dLqsTdRa.1Mk17F2smGvvWJwHJgmffiLyPw4iruh6Dtt6ROnwoLPVH68mlWIYynnoBae4L19Z' #<8位的用户名>.<64位的密文串>
+```
+
+'object'用以指定要操作的对象，支持以下value：
+```
+'module'    # 操作一个module对象，可以使用别名：'-m','mod'
+'instance'  # 操作一个instance对象，可以使用别名：'-s','inst'
+'node'      # 操作一个node对象，可以使用别名：'-n'
+'relation'  # 表示一个关系操作,
+'push'      # 表示一个push操作，即将配置对象应用到实际的服务器。
+```
+
+'action'支持以下value：
+```
+'scan'            # 自动添加node或module, 对于module还可以自动更新pillar参数列表。
+                  # 支持操作对象：module, node
+
+'add'             # 手动添加节点，模块，或者实例
+                  # 支持操作对象：node, module, instance
+
+'delete'          # 删除node, module, instance. 可以使用别名: 'del'
+                  # 支持操作对象：node, module, instance
+
+'show'            # 获取对象信息。
+                  # 支持操作对象：node, module, instance
+
+'pillarSet'       # 设置instance的pillar属性的变量值。可以使用别名：'pset'
+                  # 支持操作对象：instance
+
+'pillarDel'       # 删除instance的pillar属性的变量。  可以使用别名：'pdel'
+                  # 支持操作对象：instance
+
+'environmentSet'  # 可设置node的environment属性。别名：'eset', 'envSet'
+                  # 支持操作对象：node
+
+'lock'            # 锁定一个节点，模块，或者实例
+                  # 注意，对于module，是将其lock_count属性加1，其值可以大于1。非0即为锁定状态。
+                  # 处于锁定状态的对象，不能被push到实际服务器。
+                  # 支持操作对象：node, module, instance
+
+'unlock'          # 解锁一个节点，模块，或者实例
+                  # 注意，对于module的解锁，是将lock_count减1，不是直接解锁，当lock_count值为0时，才真正处于解锁状态。
+                  # 支持操作对象：node, module, instance
+
+'showBind'        # 用于查询一个instance或module被绑定到哪些node，将返回一个node列表。别名：'showb'
+                  # 支持操作对象：module, instance
+
+'include'         # 用于设置一个instance包含另外一个instance
+                  # 支持操作对象：relation
+
+'exclude'         # 解除一个instance对另外一个instance的包含关系
+                  # 支持操作对象：relation
+
+'bind'            # 将instance或module绑定到node
+                  # 支持操作对象：relation
+
+'unbind'          # 解除instance或module与node的绑定关系
+                  # 支持操作对象：relation
+
+'push'            # 推送配置对象module或instance到实际服务器
+                  # 支持操作对象：push
+```
